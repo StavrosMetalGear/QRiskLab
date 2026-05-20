@@ -19,6 +19,8 @@ add_executable(QRiskLab
 
     src/utils/logger.h
     src/utils/logger.cpp
+    src/utils/timer.h
+    src/utils/timer.cpp
 )
 
 target_include_directories(QRiskLab PRIVATE src)
