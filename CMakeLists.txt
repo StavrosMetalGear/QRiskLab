@@ -16,6 +16,9 @@ add_executable(QRiskLab
     src/finance/MonteCarlo.cpp
     src/finance/RiskMetrics.h
     src/finance/RiskMetrics.cpp
+
+    src/utils/logger.h
+    src/utils/logger.cpp
 )
 
 target_include_directories(QRiskLab PRIVATE src)

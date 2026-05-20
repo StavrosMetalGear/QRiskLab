@@ -1,6 +1,7 @@
 #include "core/QuantumState.h"
 #include "finance/MonteCarlo.h"
 #include "finance/RiskMetrics.h"
+#include "utils/Logger.h"
 
 #include <chrono>
 #include <cstdint>
@@ -26,6 +27,8 @@ namespace
 
     void runBellDemo()
     {
+        QRISK_LOG_INFO("Starting Bell state demo.");
+
         std::cout << "[Quantum Demo] Bell State\n\n";
 
         QuantumState state(2);
@@ -66,10 +69,14 @@ namespace
         std::cout << "|01>: " << count01 << '\n';
         std::cout << "|10>: " << count10 << '\n';
         std::cout << "|11>: " << count11 << '\n';
+
+        QRISK_LOG_INFO("Bell state demo completed.");
     }
 
     void runFinanceDemo()
     {
+        QRISK_LOG_INFO("Starting finance Monte Carlo demo.");
+
         std::cout << "[Finance Demo] Monte Carlo Option Pricing + Risk Metrics\n\n";
 
         const double spot = 100.0;
@@ -79,6 +86,9 @@ namespace
         const double maturityYears = 1.0;
         const std::size_t paths = 100000;
         const std::uint64_t seed = 2026;
+
+        QRISK_LOG_INFO("Monte Carlo paths: " + std::to_string(paths));
+        QRISK_LOG_INFO("Monte Carlo seed: " + std::to_string(seed));
 
         const auto start = std::chrono::high_resolution_clock::now();
 
@@ -125,6 +135,8 @@ namespace
         std::cout << "95% CVaR: " << cvar95 << "\n\n";
 
         std::cout << "Elapsed: " << elapsedMs << " ms\n";
+
+        QRISK_LOG_INFO("Finance Monte Carlo demo completed in " + std::to_string(elapsedMs) + " ms.");
     }
 
     void printUsage()
@@ -140,15 +152,24 @@ int main(int argc, char** argv)
 {
     try
     {
+        qrisk::utils::Logger::instance().setMinimumLevel(qrisk::utils::LogLevel::Info);
+        qrisk::utils::Logger::instance().enableConsole(true);
+
+        QRISK_LOG_INFO("QRiskLab started.");
+
         printHeader();
 
         if (argc < 2)
         {
+            QRISK_LOG_WARNING("No mode provided by user.");
             printUsage();
+            QRISK_LOG_INFO("QRiskLab finished.");
             return 0;
         }
 
         const std::string mode = argv[1];
+
+        QRISK_LOG_INFO("Selected mode: " + mode);
 
         if (mode == "bell")
         {
@@ -166,16 +187,18 @@ int main(int argc, char** argv)
         }
         else
         {
+            QRISK_LOG_ERROR("Unknown mode: " + mode);
             std::cerr << "Unknown mode: " << mode << "\n\n";
             printUsage();
             return 1;
         }
 
+        QRISK_LOG_INFO("QRiskLab finished successfully.");
         return 0;
     }
     catch (const std::exception& ex)
     {
-        std::cerr << "Error: " << ex.what() << '\n';
+        QRISK_LOG_CRITICAL(std::string("Fatal error: ") + ex.what());
         return 1;
     }
 }
