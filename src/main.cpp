@@ -2,7 +2,7 @@
 #include "finance/MonteCarlo.h"
 #include "finance/RiskMetrics.h"
 #include "utils/Logger.h"
-
+#include "utils/Timer.h"
 #include <chrono>
 #include <cstdint>
 #include <exception>
@@ -28,7 +28,7 @@ namespace
     void runBellDemo()
     {
         QRISK_LOG_INFO("Starting Bell state demo.");
-
+        qrisk::utils::ScopedTimer scopedTimer("Bell state demo");
         std::cout << "[Quantum Demo] Bell State\n\n";
 
         QuantumState state(2);
@@ -90,7 +90,7 @@ namespace
         QRISK_LOG_INFO("Monte Carlo paths: " + std::to_string(paths));
         QRISK_LOG_INFO("Monte Carlo seed: " + std::to_string(seed));
 
-        const auto start = std::chrono::high_resolution_clock::now();
+        qrisk::utils::Timer timer;
 
         const auto optionResult = MonteCarlo::priceEuropeanCall(
             spot,
@@ -114,8 +114,7 @@ namespace
         const double var95 = RiskMetrics::valueAtRisk(losses, 0.95);
         const double cvar95 = RiskMetrics::conditionalValueAtRisk(losses, 0.95);
 
-        const auto end = std::chrono::high_resolution_clock::now();
-        const auto elapsedMs = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+        const double elapsedMs = timer.elapsedMilliseconds();
 
         std::cout << std::fixed << std::setprecision(6);
 
