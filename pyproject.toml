@@ -1,0 +1,21 @@
+[build-system]
+requires = ["scikit-build-core>=0.8", "pybind11>=2.11", "setuptools>=69", "wheel"]
+build-backend = "scikit_build_core.build"
+
+[project]
+name = "qrisklab"
+version = "0.1.0"
+description = "Hybrid Python/C++ platform for quantum finance, quantum computing, and high-performance risk simulation."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "Your Name" }]
+
+[tool.ruff]
+line-length = 100
+
+[tool.black]
+line-length = 100
+
+[tool.pytest.ini_options]
+testpaths = ["python/tests"]
+pythonpath = ["python"]

@@ -1,0 +1,256 @@
+QRiskLab Pro — Professional Hybrid Python/C++ Architecture
+===========================================================
+
+Goal
+----
+Transform QRiskLab from a C++ command-line project into a hybrid Python/C++ quantum finance and quantum computing platform.
+
+Core identity:
+Python = research layer, dashboards, AI/ML, quantum libraries, finance workflows.
+C++ = high-performance engine for Monte Carlo, risk, option pricing, and future circuit/statevector simulation.
+
+Recommended Repository Architecture
+-----------------------------------
+
+QRiskLab/
+|
+|-- CMakeLists.txt
+|-- pyproject.toml
+|-- README.md
+|-- requirements.txt
+|-- requirements-dev.txt
+|-- .gitignore
+|-- .env.example
+|
+|-- cpp_core/
+|   |-- CMakeLists.txt
+|   |-- include/
+|   |   |-- qrisklab/
+|   |   |   |-- finance/
+|   |   |   |   |-- MonteCarloEngine.hpp
+|   |   |   |   |-- RiskMetrics.hpp
+|   |   |   |   |-- OptionPricing.hpp
+|   |   |   |-- quantum/
+|   |   |   |   |-- StateVectorSimulator.hpp
+|   |   |   |   |-- CircuitStepper.hpp
+|   |   |   |-- utils/
+|   |   |       |-- Logger.hpp
+|   |   |       |-- Timer.hpp
+|   |   |
+|   |-- src/
+|   |   |-- finance/
+|   |   |   |-- MonteCarloEngine.cpp
+|   |   |   |-- RiskMetrics.cpp
+|   |   |   |-- OptionPricing.cpp
+|   |   |-- quantum/
+|   |   |   |-- StateVectorSimulator.cpp
+|   |   |   |-- CircuitStepper.cpp
+|   |   |-- utils/
+|   |       |-- Logger.cpp
+|   |       |-- Timer.cpp
+|   |
+|   |-- apps/
+|   |   |-- qrisklab_cli.cpp
+|   |
+|   |-- tests/
+|       |-- test_monte_carlo.cpp
+|       |-- test_risk_metrics.cpp
+|
+|-- bindings/
+|   |-- CMakeLists.txt
+|   |-- pybind_module.cpp
+|
+|-- python/
+|   |-- qrisklab/
+|   |   |-- __init__.py
+|   |   |-- config.py
+|   |   |
+|   |   |-- cpp/
+|   |   |   |-- __init__.py
+|   |   |   |-- bridge.py
+|   |   |
+|   |   |-- finance/
+|   |   |   |-- __init__.py
+|   |   |   |-- data.py
+|   |   |   |-- returns.py
+|   |   |   |-- portfolio.py
+|   |   |   |-- risk.py
+|   |   |   |-- option_pricing.py
+|   |   |
+|   |   |-- quantum/
+|   |   |   |-- __init__.py
+|   |   |   |-- circuits.py
+|   |   |   |-- qaoa_portfolio.py
+|   |   |   |-- pennylane_models.py
+|   |   |   |-- qutip_lab.py
+|   |   |
+|   |   |-- qml/
+|   |   |   |-- __init__.py
+|   |   |   |-- classifiers.py
+|   |   |   |-- kernels.py
+|   |   |   |-- torch_hybrid.py
+|   |   |
+|   |   |-- api/
+|   |   |   |-- __init__.py
+|   |   |   |-- main.py
+|   |   |   |-- routes_finance.py
+|   |   |   |-- routes_quantum.py
+|   |   |
+|   |   |-- dashboards/
+|   |   |   |-- __init__.py
+|   |   |   |-- app.py
+|   |   |   |-- pages/
+|   |   |       |-- 01_Monte_Carlo_Risk.py
+|   |   |       |-- 02_Portfolio_Optimization.py
+|   |   |       |-- 03_QAOA_Portfolio.py
+|   |   |       |-- 04_Quantum_Dynamics.py
+|   |   |       |-- 05_Benchmarks.py
+|   |   |
+|   |   |-- experiments/
+|   |   |   |-- __init__.py
+|   |   |   |-- tracker.py
+|   |   |   |-- registry.py
+|   |   |
+|   |   |-- reports/
+|   |       |-- __init__.py
+|   |       |-- html_report.py
+|   |       |-- pdf_report.py
+|   |
+|   |-- tests/
+|       |-- test_finance.py
+|       |-- test_quantum.py
+|       |-- test_cpp_bridge.py
+|
+|-- notebooks/
+|   |-- 01_monte_carlo_risk.ipynb
+|   |-- 02_portfolio_optimization.ipynb
+|   |-- 03_qaoa_portfolio.ipynb
+|   |-- 04_qutip_dynamics.ipynb
+|   |-- 05_python_cpp_benchmarks.ipynb
+|
+|-- data/
+|   |-- raw/
+|   |-- processed/
+|   |-- examples/
+|
+|-- results/
+|   |-- experiments/
+|   |-- figures/
+|   |-- reports/
+|
+|-- docs/
+|   |-- architecture.md
+|   |-- build.md
+|   |-- modules.md
+|   |-- roadmap.md
+|
+|-- docker/
+|   |-- Dockerfile
+|   |-- docker-compose.yml
+|
+|-- scripts/
+    |-- build_cpp.sh
+    |-- run_dashboard.sh
+    |-- run_api.sh
+    |-- benchmark_cpp_vs_python.py
+
+Main Modules
+------------
+
+1. cpp_core
+   Purpose: fast numerical engine.
+   First functions:
+   - Monte Carlo path simulation
+   - VaR / CVaR calculations
+   - Black-Scholes pricing
+   - benchmark timers
+   Later:
+   - statevector simulator
+   - sparse Hamiltonian operations
+   - circuit stepping
+
+2. bindings
+   Purpose: pybind11 bridge from Python to C++.
+   Python should be able to call:
+   - qrisklab_cpp.run_monte_carlo(...)
+   - qrisklab_cpp.calculate_var(...)
+   - qrisklab_cpp.price_option(...)
+   - qrisklab_cpp.simulate_statevector(...)
+
+3. python/qrisklab/finance
+   Purpose: quant finance workflows.
+   Include:
+   - market data loading
+   - returns and covariance
+   - portfolio optimization
+   - VaR / CVaR
+   - option pricing
+   - classical vs C++ comparison
+
+4. python/qrisklab/quantum
+   Purpose: quantum computing workflows.
+   Include:
+   - Qiskit circuits
+   - PennyLane QAOA / variational circuits
+   - QuTiP open quantum systems
+   - quantum portfolio optimization demos
+
+5. python/qrisklab/qml
+   Purpose: quantum machine learning.
+   Include:
+   - hybrid PyTorch + PennyLane models
+   - quantum kernels
+   - small classifiers
+
+6. python/qrisklab/api
+   Purpose: FastAPI backend.
+   Include endpoints:
+   - /health
+   - /risk/monte-carlo
+   - /risk/var
+   - /portfolio/optimize
+   - /quantum/qaoa
+   - /benchmark/python-vs-cpp
+
+7. python/qrisklab/dashboards
+   Purpose: Streamlit app.
+   Main pages:
+   - Monte Carlo Risk
+   - Portfolio Optimization
+   - QAOA Portfolio
+   - QuTiP Quantum Dynamics
+   - Python vs C++ Benchmarks
+
+Professional Build Order
+------------------------
+
+Phase 1: Restructure current C++ project
+- Create cpp_core/include and cpp_core/src.
+- Move current simulator/risk code into cpp_core.
+- Keep a CLI app under cpp_core/apps/qrisklab_cli.cpp.
+
+Phase 2: Add Python package
+- Create python/qrisklab.
+- Add requirements.txt.
+- Implement pure Python risk and portfolio functions first.
+
+Phase 3: Add dashboard
+- Add Streamlit pages.
+- First page: Monte Carlo Risk.
+- Second page: Portfolio Optimization.
+
+Phase 4: Add pybind11
+- Create bindings/pybind_module.cpp.
+- Expose C++ Monte Carlo engine to Python.
+- Add benchmark page: Python vs C++.
+
+Phase 5: Add quantum
+- Add Qiskit circuit demos.
+- Add PennyLane QAOA portfolio optimizer.
+- Add QuTiP dynamics demo.
+
+Phase 6: Add API and reports
+- Add FastAPI backend.
+- Add HTML/PDF reports.
+- Save experiment results.
+
