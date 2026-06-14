@@ -361,3 +361,36 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+.aider*
+# Aider ignore file
+.aiderignore
+
+# Python virtual environments / local installs
+.venv/
+venv/
+env/
+ENV/
+Lib/
+Scripts/
+Include/
+pyvenv.cfg
+site-packages/
+
+# Python packaging/build
+*.egg-info/
+dist/
+.eggs/
+pip-wheel-metadata/
+
+# Python tools
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# CMake / native build folders
+build/
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+compile_commands.json
