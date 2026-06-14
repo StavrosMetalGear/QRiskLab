@@ -243,8 +243,3 @@ __all__ = [
     "EuropeanCallPricer",
     "PricingParameters",
 ]
-````
-
-qrisklab/finance/risk.py
-````python
-<<<<<<< SEARCH
