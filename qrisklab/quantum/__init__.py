@@ -1,7 +1,10 @@
 """
 QRiskLab quantum algorithms module.
 
-This module will contain quantum algorithms for finance applications.
+Provides quantum algorithms for finance applications including amplitude estimation,
+variational quantum eigensolver, and quantum phase estimation.
+
+This module will contain quantum algorithm implementations and backend selection.
 Currently a placeholder for Phase 5 (Core Quantum Modules).
 """
 

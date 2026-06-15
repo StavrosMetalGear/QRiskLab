@@ -1,16 +1,4 @@
 """
-QRiskLab Pro - Quantum Risk Analysis Laboratory
-
-A hybrid quantum-classical framework for advanced financial risk modeling,
-portfolio optimization, and derivative pricing.
-"""
-
-__version__ = "0.1.0"
-__author__ = "QRiskLab Team"
-
-# Package metadata
-__all__ = ["api", "app", "config"]
-"""
 QRiskLab Pro - Hybrid Quantum-Classical Risk Analysis Framework
 
 A professional framework for quantum and classical risk analysis in finance.
@@ -18,16 +6,20 @@ A professional framework for quantum and classical risk analysis in finance.
 
 __version__ = "0.1.0"
 __author__ = "QRiskLab Team"
+__email__ = "team@qrisklab.dev"
 __description__ = "Hybrid Quantum-Classical Risk Analysis Framework"
 
-from qrisklab import utils, core, finance, quantum
+from qrisklab import api, app, core, finance, quantum, utils
 
 __all__ = [
-    "utils",
+    "api",
+    "app",
     "core",
     "finance",
     "quantum",
+    "utils",
     "__version__",
     "__author__",
+    "__email__",
     "__description__",
 ]

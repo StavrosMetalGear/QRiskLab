@@ -4,27 +4,9 @@ QRiskLab finance module.
 Provides bindings to C++ Monte Carlo and risk metrics calculations,
 plus high-level Python wrappers for option pricing, risk analysis,
 and portfolio management.
+
+This module will contain finance utilities and bindings to C++ implementations.
+Currently a placeholder for Phase 3-4 (C++/Python Bindings and Core Finance Modules).
 """
 
-from qrisklab.finance._qrisklab_core import (
-    MonteCarlo,
-    RiskMetrics,
-    OptionPricingResult,
-)
-from qrisklab.finance.pricing import EuropeanCallPricer, PricingParameters
-from qrisklab.finance.risk import RiskAnalyzer, RiskMetricsResult
-from qrisklab.finance.portfolio import Portfolio, Position
-
-__all__ = [
-    # C++ bindings
-    "MonteCarlo",
-    "RiskMetrics",
-    "OptionPricingResult",
-    # Python wrappers
-    "EuropeanCallPricer",
-    "PricingParameters",
-    "RiskAnalyzer",
-    "RiskMetricsResult",
-    "Portfolio",
-    "Position",
-]
+__all__ = []
