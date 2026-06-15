@@ -83,18 +83,12 @@ PYBIND11_MODULE(_qrisklab_core, m)
     // ========================================================================
     py::class_<OptionPricingResult>(m, "OptionPricingResult",
         "Result of European call option pricing")
-        .def_readwrite("price", &OptionPricingResult::price,
-            "Option price")
-        .def_readwrite("delta", &OptionPricingResult::delta,
-            "Delta (price sensitivity to spot price)")
-        .def_readwrite("gamma", &OptionPricingResult::gamma,
-            "Gamma (delta sensitivity to spot price)")
-        .def_readwrite("vega", &OptionPricingResult::vega,
-            "Vega (price sensitivity to volatility)")
-        .def_readwrite("theta", &OptionPricingResult::theta,
-            "Theta (price sensitivity to time decay)")
-        .def_readwrite("rho", &OptionPricingResult::rho,
-            "Rho (price sensitivity to interest rate)");
+        .def_readwrite("estimated_price", &OptionPricingResult::estimatedPrice,
+            "Estimated option price from Monte Carlo")
+        .def_readwrite("standard_error", &OptionPricingResult::standardError,
+            "Standard error of the price estimate")
+        .def_readwrite("discounted_payoffs", &OptionPricingResult::discountedPayoffs,
+            "Vector of discounted payoffs from all paths");
 
     // ========================================================================
     // MonteCarlo Bindings
@@ -121,7 +115,7 @@ PYBIND11_MODULE(_qrisklab_core, m)
             "  paths: Number of Monte Carlo paths\n"
             "  seed: Random seed for reproducibility\n\n"
             "Returns:\n"
-            "  OptionPricingResult with price and Greeks")
+            "  OptionPricingResult with estimated_price, standard_error, and discounted_payoffs")
         
         .def_static("simulate_portfolio_losses",
             &MonteCarlo::simulatePortfolioLosses,
