@@ -9,6 +9,12 @@ and portfolio management.
 try:
     from qrisklab._qrisklab_core import MonteCarlo, RiskMetrics, OptionPricingResult
     __all__ = ["MonteCarlo", "RiskMetrics", "OptionPricingResult"]
-except ImportError:
+except ImportError as e:
     # Bindings not yet built
+    import warnings
+    warnings.warn(
+        f"Could not import finance bindings from compiled C++ module: {e}. "
+        "Please build the C++ extensions with: python -m pip install -e .",
+        ImportWarning
+    )
     __all__ = []
