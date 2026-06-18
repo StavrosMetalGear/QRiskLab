@@ -4,8 +4,10 @@ QRiskLab App module
 Provides Streamlit dashboard and interactive applications for visualization
 and analysis of quantum and classical risk metrics.
 
-This module will contain Streamlit pages and dashboard utilities.
-Currently a placeholder for Phase 7 (Streamlit Dashboard).
+Includes dashboard pages for option pricing, risk analysis, quantum algorithms,
+and portfolio management.
 """
 
-__all__ = []
+from qrisklab.app import dashboard, pages, utils
+
+__all__ = ["dashboard", "pages", "utils"]
