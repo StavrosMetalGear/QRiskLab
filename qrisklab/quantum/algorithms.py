@@ -7,7 +7,7 @@ risk analysis and optimization.
 """
 
 from typing import List, Dict, Optional, Tuple, Callable
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from abc import ABC, abstractmethod
 import logging
 
@@ -24,7 +24,7 @@ class AlgorithmResult:
     success: bool
     iterations: int
     execution_time_seconds: float
-    metadata: Dict = None
+    metadata: Dict = field(default=None, kw_only=True)
 
     def __post_init__(self):
         if self.metadata is None:

@@ -11,6 +11,7 @@ from setuptools.command.build_ext import build_ext
 from setuptools.extension import Extension
 import subprocess
 import os
+import shutil
 
 
 class CMakeExtension(Extension):
@@ -34,8 +35,11 @@ class CMakeBuild(build_ext):
         build_temp.mkdir(parents=True, exist_ok=True)
 
         # Configure CMake
+        build_lib = Path(self.build_lib).absolute()
+
         cmake_args = [
-            f"-DCMAKE_LIBRARY_OUTPUT_DIRECTORY={Path(self.build_lib).absolute()}",
+            f"-DCMAKE_LIBRARY_OUTPUT_DIRECTORY={build_lib}",
+            f"-DCMAKE_LIBRARY_OUTPUT_DIRECTORY_RELEASE={build_lib}",
             f"-DPYTHON_EXECUTABLE={sys.executable}",
             "-DCMAKE_BUILD_TYPE=Release",
         ]
@@ -49,6 +53,20 @@ class CMakeBuild(build_ext):
             ["cmake", "--build", ".", "--config", "Release"],
             cwd=build_temp,
         )
+
+        expected_path = Path(self.get_ext_fullpath(ext.name)).absolute()
+        if not expected_path.exists():
+            module_name = ext.name.split(".")[-1]
+            candidates = list(build_lib.rglob(f"{module_name}*.pyd"))
+            if not candidates:
+                candidates = list(build_temp.rglob(f"{module_name}*.pyd"))
+            if not candidates:
+                raise FileNotFoundError(f"Could not find built extension for {ext.name}")
+
+            source_path = candidates[0]
+            expected_path.parent.mkdir(parents=True, exist_ok=True)
+            if source_path.resolve() != expected_path.resolve():
+                shutil.copy2(source_path, expected_path)
 
 
 # Read long description from README
@@ -72,7 +90,7 @@ setup(
         "Issue Tracker": "https://github.com/qrisklab/qrisklab/issues",
     },
     packages=find_packages(),
-    ext_modules=[CMakeExtension("_qrisklab_core")],
+    ext_modules=[CMakeExtension("qrisklab.finance._qrisklab_core")],
     cmdclass={"build_ext": CMakeBuild},
     python_requires=">=3.10",
     install_requires=[

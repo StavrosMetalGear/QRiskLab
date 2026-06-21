@@ -40,6 +40,9 @@ def setup_logging(
         >>> from qrisklab.utils.logger import setup_logging, LogLevel
         >>> setup_logging(level=LogLevel.DEBUG, log_file="qrisklab.log")
     """
+    if isinstance(level, str):
+        level = LogLevel[level.upper()]
+
     root_logger = logging.getLogger()
     root_logger.setLevel(level.value)
 
