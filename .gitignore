@@ -395,3 +395,5 @@ CMakeFiles/
 CMakeCache.txt
 compile_commands.json
 python/
+# Python native extension build artifacts
+*.pyd
