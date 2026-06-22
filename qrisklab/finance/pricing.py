@@ -138,9 +138,14 @@ class EuropeanCallPricer:
 
         # Cache result
         self._cache[cache_key] = result
+        estimated_price = getattr(result, "estimated_price", getattr(result, "price", None))
+        if isinstance(estimated_price, (int, float)):
+            price_text = f"{estimated_price:.4f}"
+        else:
+            price_text = str(estimated_price)
         logger.info(
             f"Priced European call: S={spot_price}, K={strike_price}, "
-            f"Price={result.price:.4f}"
+            f"Price={price_text}"
         )
 
         return result

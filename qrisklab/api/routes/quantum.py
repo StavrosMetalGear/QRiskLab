@@ -50,7 +50,11 @@ async def list_backends() -> QuantumBackendListResponse:
         available = BackendFactory.get_available_backends()
         backend_info = BackendFactory.list_backends()
         default = BackendFactory.get_default_backend()
-        default_name = default.name if default else None
+        default_name = None
+        if default:
+            default_name = getattr(default, "name", default)
+            if not isinstance(default_name, str):
+                default_name = str(default_name)
 
         return QuantumBackendListResponse(
             available_backends=available,

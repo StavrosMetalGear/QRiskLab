@@ -18,6 +18,7 @@ try:
     from qrisklab.core import QuantumState
     HAS_QUANTUM_STATE = True
 except ImportError:
+    QuantumState = None
     HAS_QUANTUM_STATE = False
     logger.warning("QuantumState C++ bindings not available. Install with: python -m pip install -e .")
 
@@ -57,7 +58,7 @@ class QuantumStateWrapper:
             ValueError: If qubit_count is invalid
             RuntimeError: If C++ bindings are not available
         """
-        if not HAS_QUANTUM_STATE:
+        if QuantumState is None:
             raise RuntimeError(
                 "QuantumState C++ bindings not available. "
                 "Please build the C++ extensions with: python -m pip install -e ."
@@ -221,8 +222,9 @@ class QuantumStateWrapper:
             Dictionary mapping basis state strings to probabilities
         """
         probabilities = {}
-        for i in range(self.dimension):
-            prob = self.get_probability(i)
+        amplitudes = self.get_amplitudes()
+        for i, amplitude in enumerate(amplitudes):
+            prob = abs(amplitude) ** 2
             if prob > epsilon:
                 # Convert index to binary string
                 basis_str = format(i, f'0{self._qubit_count}b')

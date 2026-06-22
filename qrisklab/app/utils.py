@@ -60,7 +60,7 @@ def format_currency(value: float, decimals: int = 2) -> str:
     Returns:
         Formatted currency string
     """
-    return f"${value:,.{decimals}f}"
+    return f"${value:.{decimals}f}"
 
 
 def format_percentage(value: float, decimals: int = 2) -> str:
