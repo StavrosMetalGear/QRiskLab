@@ -78,6 +78,12 @@ See [INSTALLATION.md](docs/INSTALLATION.md) for:
 
 ## 🚀 Quick Start
 
+### Developer Validation
+Windows users can run:
+```bash
+powershell -ExecutionPolicy Bypass -File .\scripts\validate_dev.ps1
+```
+
 ### Python API
 
 ```python

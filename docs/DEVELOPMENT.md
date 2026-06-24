@@ -166,7 +166,14 @@ class MyClass:
         return result
 ```
 
-## Testing
+## Developer Validation
+
+The validation script checks imports, verifies the finance C++ extension import, and runs `pytest tests/ -q`. 
+
+On Windows, if scripts are blocked, use:
+```bash
+powershell -ExecutionPolicy Bypass -File .\scripts\validate_dev.ps1
+```
 
 ### Running Tests
 
