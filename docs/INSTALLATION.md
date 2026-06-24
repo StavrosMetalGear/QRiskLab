@@ -103,6 +103,21 @@ If not installed, download from [git-scm.com](https://git-scm.com/downloads)
 
 ## Installation Steps
 
+### Windows Development Setup
+
+```bash
+cd C:\Users\stavr\source\repos\QRiskLab
+py -3.11 -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip setuptools wheel cmake ninja
+python -m pip install -r requirements.txt
+python -m pip install -r requirements-dev.txt
+python -m pybind11 --cmakedir
+# Set pybind11_DIR using the printed path
+python -m pip install -e .
+powershell -ExecutionPolicy Bypass -File .\scripts\validate_dev.ps1
+```
+
 ### Step 1: Clone the Repository
 
 ```bash

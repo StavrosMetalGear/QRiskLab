@@ -54,6 +54,10 @@ A professional framework for quantum and classical risk analysis in finance. QRi
 
 ## 🔧 Installation
 
+### Virtual Environment
+
+For a professional setup, refer to [INSTALLATION.md](docs/INSTALLATION.md) for instructions on using a local `.venv`.
+
 ### Quick Start (Development)
 
 ```bash

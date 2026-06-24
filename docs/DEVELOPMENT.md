@@ -65,6 +65,10 @@ pip install -r requirements-dev.txt
 
 ## Code Style
 
+### Virtual Environment
+
+It is recommended to use a local `.venv` for all development to avoid conflicts with global packages.
+
 ### Python Style Guide
 
 Follow PEP 8 with these tools:
