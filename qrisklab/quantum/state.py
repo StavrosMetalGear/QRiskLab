@@ -16,7 +16,7 @@ logger = get_logger(__name__)
 
 try:
     from qrisklab.core import QuantumState
-    HAS_QUANTUM_STATE = True
+    HAS_QUANTUM_STATE = True  # Suppress import warning
 except ImportError:
     QuantumState = None
     HAS_QUANTUM_STATE = False
