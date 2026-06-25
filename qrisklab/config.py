@@ -44,6 +44,7 @@ class Config:
     @classmethod
     def to_dict(cls) -> dict:
         """Return configuration as dictionary."""
+        """Return configuration as dictionary."""
         return {
             key: getattr(cls, key)
             for key in dir(cls)
