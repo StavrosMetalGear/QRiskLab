@@ -46,7 +46,10 @@ def setup_logging(
     root_logger = logging.getLogger()
     root_logger.setLevel(level.value)
 
-    # Remove existing handlers
+    # Remove existing handlers and close them
+    for handler in root_logger.handlers[:]:
+        handler.flush()
+        handler.close()
     for handler in root_logger.handlers[:]:
         root_logger.removeHandler(handler)
 
