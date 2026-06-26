@@ -6,7 +6,7 @@ with automatic validation and documentation.
 """
 
 from typing import List, Optional, Dict, Any
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, Field, field_validator
 
 
 # ============================================================================
@@ -115,7 +115,7 @@ class SensitivityRequest(BaseModel):
     range_pct: float = Field(0.2, ge=0.01, le=1.0, description="Range as percentage")
     steps: int = Field(5, ge=3, le=20, description="Number of steps in range")
 
-    @validator("parameter")
+    @field_validator("parameter")
     def validate_parameter(cls, v):
         if v not in ["spot_price", "volatility", "risk_free_rate"]:
             raise ValueError("Parameter must be 'spot_price', 'volatility', or 'risk_free_rate'")
