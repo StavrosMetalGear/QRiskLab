@@ -6,7 +6,7 @@ with automatic validation and documentation.
 """
 
 from typing import List, Optional, Dict, Any
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, Field, field_validator, ConfigDict
 
 
 # ============================================================================
@@ -34,18 +34,17 @@ class EuropeanCallRequest(BaseModel):
     paths: int = Field(10000, ge=100, description="Number of Monte Carlo paths")
     seed: int = Field(42, description="Random seed for reproducibility")
 
-    class Config:
-        schema_extra = {
-            "example": {
-                "spot_price": 100.0,
-                "strike_price": 105.0,
-                "risk_free_rate": 0.05,
-                "volatility": 0.2,
-                "maturity_years": 1.0,
-                "paths": 10000,
-                "seed": 42,
-            }
+    model_config = ConfigDict(json_schema_extra={
+        "example": {
+            "spot_price": 100.0,
+            "strike_price": 105.0,
+            "risk_free_rate": 0.05,
+            "volatility": 0.2,
+            "maturity_years": 1.0,
+            "paths": 10000,
+            "seed": 42,
         }
+    })
 
 
 class OptionPricingResponse(BaseModel):
