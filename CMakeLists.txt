@@ -27,13 +27,13 @@ set(UTILS_SOURCES
 
 # Create static libraries for core, finance, and utils
 add_library(qrisklab_core STATIC ${CORE_SOURCES})
-target_include_directories(qrisklab_core PUBLIC src)
+target_include_directories(qrisklab_core PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
 add_library(qrisklab_finance STATIC ${FINANCE_SOURCES})
-target_include_directories(qrisklab_finance PUBLIC src)
+target_include_directories(qrisklab_finance PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
 add_library(qrisklab_utils STATIC ${UTILS_SOURCES})
-target_include_directories(qrisklab_utils PUBLIC src)
+target_include_directories(qrisklab_utils PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
 # Create the main executable
 add_executable(QRiskLab
