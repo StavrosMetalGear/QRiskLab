@@ -70,27 +70,26 @@ class BatchPricingRequest(BaseModel):
     """Request for batch option pricing."""
     options: List[EuropeanCallRequest] = Field(..., description="List of options to price")
 
-    class Config:
-        schema_extra = {
-            "example": {
-                "options": [
-                    {
-                        "spot_price": 100.0,
-                        "strike_price": 105.0,
-                        "risk_free_rate": 0.05,
-                        "volatility": 0.2,
-                        "maturity_years": 1.0,
-                    },
-                    {
-                        "spot_price": 100.0,
-                        "strike_price": 95.0,
-                        "risk_free_rate": 0.05,
-                        "volatility": 0.2,
-                        "maturity_years": 1.0,
-                    },
-                ]
-            }
+    model_config = ConfigDict(json_schema_extra={
+        "example": {
+            "options": [
+                {
+                    "spot_price": 100.0,
+                    "strike_price": 105.0,
+                    "risk_free_rate": 0.05,
+                    "volatility": 0.2,
+                    "maturity_years": 1.0,
+                },
+                {
+                    "spot_price": 100.0,
+                    "strike_price": 95.0,
+                    "risk_free_rate": 0.05,
+                    "volatility": 0.2,
+                    "maturity_years": 1.0,
+                },
+            ]
         }
+    })
 
 
 class BatchPricingResponse(BaseModel):
