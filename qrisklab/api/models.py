@@ -140,13 +140,12 @@ class RiskAnalysisRequest(BaseModel):
         description="Confidence level for VaR/CVaR (e.g., 0.95 for 95%)"
     )
 
-    class Config:
-        schema_extra = {
-            "example": {
-                "losses": [-100, -50, 0, 50, 100, -75, 25, -150, 200, -30],
-                "confidence_level": 0.95,
-            }
+    model_config = ConfigDict(json_schema_extra={
+        "example": {
+            "losses": [-100, -50, 0, 50, 100, -75, 25, -150, 200, -30],
+            "confidence_level": 0.95,
         }
+    })
 
 
 class RiskMetricsResponse(BaseModel):
