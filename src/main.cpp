@@ -1,8 +1,8 @@
 #include "core/QuantumState.h"
 #include "finance/MonteCarlo.h"
 #include "finance/RiskMetrics.h"
-#include "utils/Logger.h"
-#include "utils/Timer.h"
+#include "utils/logger.h"
+#include "utils/timer.h"
 #include <chrono>
 #include <cstdint>
 #include <exception>
