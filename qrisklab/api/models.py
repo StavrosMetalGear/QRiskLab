@@ -55,16 +55,15 @@ class OptionPricingResponse(BaseModel):
     spot_price: float = Field(..., description="Input spot price")
     strike_price: float = Field(..., description="Input strike price")
 
-    class Config:
-        schema_extra = {
-            "example": {
-                "estimated_price": 5.234,
-                "standard_error": 0.045,
-                "paths": 10000,
-                "spot_price": 100.0,
-                "strike_price": 105.0,
-            }
+    model_config = ConfigDict(json_schema_extra={
+        "example": {
+            "estimated_price": 5.234,
+            "standard_error": 0.045,
+            "paths": 10000,
+            "spot_price": 100.0,
+            "strike_price": 105.0,
         }
+    })
 
 
 class BatchPricingRequest(BaseModel):
