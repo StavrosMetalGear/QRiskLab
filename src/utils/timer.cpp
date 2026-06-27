@@ -1,5 +1,5 @@
-#include "utils/Timer.h"
-#include "utils/Logger.h"
+#include "timer.h"
+#include "logger.h"
 
 #include <iomanip>
 #include <sstream>
