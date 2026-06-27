@@ -34,6 +34,7 @@ target_include_directories(qrisklab_finance PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/s
 
 add_library(qrisklab_utils STATIC ${UTILS_SOURCES})
 target_include_directories(qrisklab_utils PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src)
+target_include_directories(qrisklab_utils PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src)
 
 # Create the main executable
 add_executable(QRiskLab
