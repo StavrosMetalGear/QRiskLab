@@ -4,14 +4,15 @@ Setup configuration for QRiskLab Pro.
 Configures the build system for C++ extensions and Python package installation.
 """
 
-import sys
-from pathlib import Path
-from setuptools import setup, find_packages
-from setuptools.command.build_ext import build_ext
-from setuptools.extension import Extension
-import subprocess
 import os
 import shutil
+import subprocess
+import sys
+from pathlib import Path
+
+from setuptools import find_packages, setup
+from setuptools.command.build_ext import build_ext
+from setuptools.extension import Extension
 
 
 class CMakeExtension(Extension):
@@ -30,11 +31,9 @@ class CMakeBuild(build_ext):
             super().build_extension(ext)
             return
 
-        # Create build directory
-        build_temp = Path(self.build_temp)
+        build_temp = Path(self.build_temp).absolute()
         build_temp.mkdir(parents=True, exist_ok=True)
 
-        # Configure CMake
         build_lib = Path(self.build_lib).absolute()
 
         cmake_args = [
@@ -44,29 +43,37 @@ class CMakeBuild(build_ext):
             "-DCMAKE_BUILD_TYPE=Release",
         ]
 
-        # Build with CMake
         subprocess.check_call(
             ["cmake", ext.sourcedir] + cmake_args,
             cwd=build_temp,
         )
+
         subprocess.check_call(
             ["cmake", "--build", ".", "--config", "Release"],
             cwd=build_temp,
         )
 
         expected_path = Path(self.get_ext_fullpath(ext.name)).absolute()
-        if not expected_path.exists():
-            module_name = ext.name.split(".")[-1]
-            candidates = list(build_lib.rglob(f"{module_name}*.pyd"))
-            if not candidates:
-                candidates = list(build_temp.rglob(f"{module_name}*.pyd"))
-            if not candidates:
-                raise FileNotFoundError(f"Could not find built extension for {ext.name}")
+        if expected_path.exists():
+            return
 
-            source_path = candidates[0]
-            expected_path.parent.mkdir(parents=True, exist_ok=True)
-            if source_path.resolve() != expected_path.resolve():
-                shutil.copy2(source_path, expected_path)
+        module_name = ext.name.split(".")[-1]
+
+        candidates = []
+        for search_root in (build_lib, build_temp):
+            candidates.extend(search_root.rglob(f"{module_name}*.pyd"))
+            candidates.extend(search_root.rglob(f"{module_name}*.so"))
+            candidates.extend(search_root.rglob(f"{module_name}*.dll"))
+            candidates.extend(search_root.rglob(f"{module_name}*.dylib"))
+
+        if not candidates:
+            raise FileNotFoundError(f"Could not find built extension for {ext.name}")
+
+        source_path = candidates[0]
+        expected_path.parent.mkdir(parents=True, exist_ok=True)
+
+        if source_path.resolve() != expected_path.resolve():
+            shutil.copy2(source_path, expected_path)
 
 
 # Read long description from README
