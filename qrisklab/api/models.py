@@ -255,15 +255,14 @@ class QuantumAmplitudeEstimationRequest(BaseModel):
     precision_bits: int = Field(3, ge=1, le=10, description="Precision bits for phase estimation")
     backend: Optional[str] = Field(None, description="Quantum backend to use")
 
-    class Config:
-        schema_extra = {
-            "example": {
-                "num_qubits": 5,
-                "shots": 1024,
-                "precision_bits": 3,
-                "backend": "qiskit_aer",
-            }
+    model_config = ConfigDict(json_schema_extra={
+        "example": {
+            "num_qubits": 5,
+            "shots": 1024,
+            "precision_bits": 3,
+            "backend": "qiskit_aer",
         }
+    })
 
 
 class QuantumAlgorithmResponse(BaseModel):
