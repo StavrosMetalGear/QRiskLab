@@ -5,7 +5,7 @@ Provides bindings to C++ quantum state management and operations.
 """
 
 try:
-    from qrisklab._qrisklab_core import QuantumState
+    from qrisklab.finance._qrisklab_core import QuantumState
     __all__ = ["QuantumState"]
 except ImportError as e:
     # Bindings not yet built

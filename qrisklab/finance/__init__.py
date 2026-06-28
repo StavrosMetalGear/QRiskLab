@@ -7,7 +7,7 @@ and portfolio management.
 """
 
 try:
-    from qrisklab._qrisklab_core import MonteCarlo, RiskMetrics, OptionPricingResult
+    from qrisklab.finance._qrisklab_core import MonteCarlo, RiskMetrics, OptionPricingResult
     __all__ = ["MonteCarlo", "RiskMetrics", "OptionPricingResult"]
 except ImportError as e:
     # Bindings not yet built
