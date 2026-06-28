@@ -283,16 +283,15 @@ class QuantumStateRequest(BaseModel):
         description="List of gate operations to apply"
     )
 
-    class Config:
-        schema_extra = {
-            "example": {
-                "qubit_count": 2,
-                "operations": [
-                    {"gate": "hadamard", "target": 0},
-                    {"gate": "cnot", "control": 0, "target": 1},
-                ],
-            }
+    model_config = ConfigDict(json_schema_extra={
+        "example": {
+            "qubit_count": 2,
+            "operations": [
+                {"gate": "hadamard", "target": 0},
+                {"gate": "cnot", "control": 0, "target": 1},
+            ],
         }
+    })
 
 
 class QuantumStateResponse(BaseModel):
