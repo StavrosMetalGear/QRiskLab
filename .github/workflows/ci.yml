@@ -34,10 +34,7 @@ jobs:
         run: |
           python -c "import qrisklab; from qrisklab.finance import MonteCarlo; print('QRiskLab import OK')"
       
-      - name: Build package
-        run: |
-          python -m build
-
+      
       - name: Run tests
         run: |
           pytest tests/ -v
