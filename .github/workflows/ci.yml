@@ -30,6 +30,10 @@ jobs:
           export CMAKE_PREFIX_PATH="$PYBIND11_CMAKE_DIR:${CMAKE_PREFIX_PATH:-}"
           pip install -e .
 
+      - name: Smoke import package
+        run: |
+          python -c "import qrisklab; from qrisklab.finance import MonteCarlo; print('QRiskLab import OK')"
+
       - name: Run tests
         run: |
           pytest tests/ -v
