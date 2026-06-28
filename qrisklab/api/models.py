@@ -159,19 +159,18 @@ class RiskMetricsResponse(BaseModel):
     mean_loss: float = Field(..., description="Mean loss")
     std_loss: float = Field(..., description="Standard deviation of losses")
 
-    class Config:
-        schema_extra = {
-            "example": {
-                "var": 75.5,
-                "cvar": 112.3,
-                "confidence_level": 0.95,
-                "sample_count": 10000,
-                "min_loss": -500.0,
-                "max_loss": 500.0,
-                "mean_loss": 0.5,
-                "std_loss": 125.3,
-            }
+    model_config = ConfigDict(json_schema_extra={
+        "example": {
+            "var": 75.5,
+            "cvar": 112.3,
+            "confidence_level": 0.95,
+            "sample_count": 10000,
+            "min_loss": -500.0,
+            "max_loss": 500.0,
+            "mean_loss": 0.5,
+            "std_loss": 125.3,
         }
+    })
 
 
 class MultiLevelRiskRequest(BaseModel):
