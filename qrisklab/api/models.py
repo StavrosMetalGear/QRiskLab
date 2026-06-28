@@ -314,14 +314,13 @@ class ErrorResponse(BaseModel):
     message: str = Field(..., description="Error message")
     details: Optional[Dict[str, Any]] = Field(None, description="Additional error details")
 
-    class Config:
-        schema_extra = {
-            "example": {
-                "error": "ValueError",
-                "message": "Invalid input parameters",
-                "details": {"field": "spot_price", "reason": "must be positive"},
-            }
+    model_config = ConfigDict(json_schema_extra={
+        "example": {
+            "error": "ValueError",
+            "message": "Invalid input parameters",
+            "details": {"field": "spot_price", "reason": "must be positive"},
         }
+    })
 
 
 __all__ = [
