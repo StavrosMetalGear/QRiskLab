@@ -8,6 +8,7 @@ import os
 import shutil
 import subprocess
 import sys
+import subprocess
 from pathlib import Path
 
 from setuptools import find_packages, setup
@@ -36,7 +37,15 @@ class CMakeBuild(build_ext):
 
         build_lib = Path(self.build_lib).absolute()
 
-        cmake_args = [
+        cmake_args = []
+        try:
+            pybind11_cmake_dir = subprocess.check_output(
+                [sys.executable, "-m", "pybind11", "--cmakedir"],
+                text=True
+            ).strip()
+            cmake_args.append(f"-Dpybind11_DIR={pybind11_cmake_dir}")
+        except subprocess.CalledProcessError:
+            pass
             f"-DCMAKE_LIBRARY_OUTPUT_DIRECTORY={build_lib}",
             f"-DCMAKE_LIBRARY_OUTPUT_DIRECTORY_RELEASE={build_lib}",
             f"-DPYTHON_EXECUTABLE={sys.executable}",
