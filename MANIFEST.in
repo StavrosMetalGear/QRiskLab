@@ -12,6 +12,7 @@ recursive-include qrisklab *.py
 recursive-include src *.h *.cpp
 recursive-include scripts *.py
 recursive-include tests *.py
+recursive-include src *.cpp *.h CMakeLists.txt
 global-exclude __pycache__
 global-exclude *.pyc
 global-exclude *.pyo
