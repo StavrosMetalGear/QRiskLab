@@ -46,11 +46,12 @@ class CMakeBuild(build_ext):
             cmake_args.append(f"-Dpybind11_DIR={pybind11_cmake_dir}")
         except subprocess.CalledProcessError:
             pass
+        cmake_args.extend([
             f"-DCMAKE_LIBRARY_OUTPUT_DIRECTORY={build_lib}",
             f"-DCMAKE_LIBRARY_OUTPUT_DIRECTORY_RELEASE={build_lib}",
             f"-DPYTHON_EXECUTABLE={sys.executable}",
             "-DCMAKE_BUILD_TYPE=Release",
-        ]
+        ])
 
         subprocess.check_call(
             ["cmake", ext.sourcedir] + cmake_args,
