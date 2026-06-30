@@ -1,12 +1,21 @@
-# QRiskLab Pro - Hybrid Quantum-Classical Risk Analysis Framework
+# QRiskLab Pro - Hybrid Quantum-Classical Risk Analysis Framework ![CI](https://github.com/qrisklab/qrisklab/actions/workflows/ci.yml/badge.svg)
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-A professional framework for quantum and classical risk analysis in finance. QRiskLab Pro combines cutting-edge quantum computing algorithms with classical Monte Carlo simulations to provide advanced financial risk analysis, option pricing, and portfolio optimization.
+QRiskLab is a hybrid Python/C++ quantum finance and risk simulation platform that combines advanced quantum computing algorithms with classical Monte Carlo simulations for comprehensive financial risk analysis and option pricing.
 
 ## 🚀 Key Features
+
+## 🏗️ Engineering Highlights
+- Python package with C++/pybind11 extension
+- CMake-based native build
+- FastAPI API layer
+- Streamlit dashboard
+- Monte Carlo option pricing
+- Quantum state / algorithm modules
+- pytest test suite and GitHub Actions CI
 
 ### 📈 Option Pricing
 - **European Call Option Pricing** using Monte Carlo simulation
@@ -44,7 +53,10 @@ A professional framework for quantum and classical risk analysis in finance. QRi
 - Interactive visualizations and charts
 - Portfolio analysis and optimization tools
 
-## 📋 Requirements
+## 📋 Current Status
+- 102 tests passing
+- CI install, smoke import, package build, and tests
+- Windows local development supported
 
 - **Python:** 3.10 or higher
 - **OS:** Windows, macOS, or Linux
