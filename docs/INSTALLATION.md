@@ -144,12 +144,13 @@ source venv/bin/activate
 python -m pip install --upgrade pip setuptools wheel
 ```
 
-### Step 4: Install QRiskLab Pro
+### Step 4: Install QRiskLab Pro (Editable Installation)
+This installs the package in editable mode, allowing you to modify code and see changes immediately. This also builds the C++/pybind11 extension.
 
 **Development Installation (Recommended for development):**
 
 ```bash
-pip install -e .
+python -m pip install -e .
 ```
 
 This installs the package in editable mode, allowing you to modify code and see changes immediately.
@@ -171,10 +172,14 @@ pip install -r requirements-dev.txt
 ### Step 6: Verify Installation
 
 ```bash
-python -c "import qrisklab; print(f'QRiskLab {qrisklab.__version__} installed successfully')"
+python -c "import qrisklab; from qrisklab.finance import MonteCarlo; print('QRiskLab import OK')"
+py -3.11 -m pytest tests\ -q
+py -3.11 -m build
 ```
 
 ## Verification
+### Verify Installation
+Run the following commands to verify the installation:
 
 ### Test Python Bindings
 
@@ -247,7 +252,8 @@ Then open `http://localhost:8501` in your browser.
 
 ## Troubleshooting
 
-### Issue: CMake not found
+### Troubleshooting
+If pybind11/CMake cannot be found, ensure pybind11, cmake, and ninja are installed in the active environment.
 
 **Solution:**
 ```bash
