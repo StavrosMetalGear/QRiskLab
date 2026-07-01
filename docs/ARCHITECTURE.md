@@ -27,7 +27,32 @@ QRiskLab Pro is a hybrid quantum-classical framework with three main layers:
 - **Extensible** - Easy to add new algorithms and backends
 - **Well-Tested** - Comprehensive test coverage
 
-## Architecture Diagram
+## Architecture Overview
+
+The architecture of QRiskLab Pro consists of several layers:
+
+1. **Python Package Layer** - The main package is located in `qrisklab/`.
+2. **C++ Native Engine** - The core C++ implementations are found in `src/`.
+3. **pybind11 Bridge** - The extension `qrisklab.finance._qrisklab_core` connects Python and C++.
+4. **Finance Modules** - Includes modules for pricing, portfolio management, and risk analysis.
+5. **Quantum Modules** - Contains state management, backends, and algorithm implementations.
+6. **FastAPI API Layer** - Provides a RESTful API for programmatic access.
+7. **Streamlit Dashboard Layer** - Offers an interactive web interface for end users.
+8. **Tests and CI** - Comprehensive testing and continuous integration processes.
+
+## Build Flow
+
+The build process for QRiskLab Pro is as follows:
+
+1. `setup.py` invokes CMake to configure the build.
+2. CMake builds the C++ libraries and the pybind11 extension.
+3. Python imports the `MonteCarlo` class from `qrisklab.finance`.
+
+Additionally, GitHub Actions performs the following tasks:
+- Install dependencies
+- Smoke import to verify the installation
+- Build the package
+- Run tests using pytest
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
