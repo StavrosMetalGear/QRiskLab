@@ -6,12 +6,19 @@ Comprehensive guide to quantum algorithms in QRiskLab Pro.
 
 1. [Overview](#overview)
 2. [Quantum Backends](#quantum-backends)
-3. [Quantum Amplitude Estimation](#quantum-amplitude-estimation)
+3. [Quantum State Management](#quantum-state-management)
+4. [Quantum Backends](#quantum-backends)
+5. [Quantum Algorithms](#quantum-algorithms)
+6. [Quantum State Utilities](#quantum-state-utilities)
+7. [Quantum Backend Abstractions](#quantum-backend-abstractions)
+8. [Quantum Algorithm Scaffolding](#quantum-algorithm-scaffolding)
 4. [Variational Quantum Eigensolver](#variational-quantum-eigensolver)
 5. [Quantum Phase Estimation](#quantum-phase-estimation)
 6. [Advanced Usage](#advanced-usage)
 
-## Overview
+## Overview of the Quantum Layer
+
+The quantum layer in QRiskLab Pro provides a structured approach to quantum computing utilities, focusing on state management, backend abstractions, and algorithm scaffolding. It is currently integrated with the Python package and is tested using pytest. The project does not claim production quantum advantage and does not support any unsupported algorithms or hardware integrations.
 
 QRiskLab Pro provides implementations of three key quantum algorithms for financial applications:
 
@@ -21,7 +28,14 @@ QRiskLab Pro provides implementations of three key quantum algorithms for financ
 
 These algorithms leverage quantum computing to solve financial problems more efficiently than classical methods.
 
-## Quantum Backends
+## Current Module Areas
+
+The current module areas include:
+
+- `qrisklab/quantum/state.py`: Quantum state management utilities.
+- `qrisklab/quantum/backends.py`: Backend abstractions for various quantum computing frameworks.
+- `qrisklab/quantum/algorithms.py`: Scaffolding for quantum algorithms.
+- C++ QuantumState binding, if supported through `qrisklab.finance._qrisklab_core`.
 
 ### Available Backends
 
