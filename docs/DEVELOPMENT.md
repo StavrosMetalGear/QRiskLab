@@ -272,7 +272,79 @@ xdg-open htmlcov/index.html  # Linux
 start htmlcov/index.html  # Windows
 ```
 
-## Current Development Workflow
+## Future Development Roadmap
+
+Phases 1-20 completed the stable foundation:
+- C++ core engine
+- Python package structure
+- pybind11 bridge
+- FastAPI API layer
+- Streamlit dashboard foundation
+- Pydantic V2 migration
+- pytest test suite
+- GitHub Actions CI
+- package build check
+- first documentation pass
+
+### Planned Future Phases
+
+- **Phase 21:** GUI roadmap and design  
+  Establish the roadmap and design for the graphical user interface (GUI).
+
+- **Phase 22:** GUI skeleton  
+  Create the basic structure of the GUI.
+
+- **Phase 23:** Information / Theory widget  
+  Develop a widget that explains:
+  - what QRiskLab does
+  - Monte Carlo simulation
+  - Geometric Brownian Motion
+  - European option pricing
+  - discounted expected payoff
+  - VaR and CVaR
+  - portfolio risk
+  - quantum states
+  - amplitudes and probabilities
+  - quantum amplitude estimation
+  - assumptions and limitations
+
+- **Phase 24:** GUI option pricing tools  
+  Implement tools for option pricing within the GUI.
+
+- **Phase 25:** GUI risk analysis tools  
+  Develop tools for risk analysis in the GUI.
+
+- **Phase 26:** GUI portfolio tools  
+  Create portfolio management tools in the GUI.
+
+- **Phase 27:** GUI quantum state tools  
+  Build tools for visualizing quantum states in the GUI.
+
+- **Phase 28:** GUI quantum algorithms  
+  Integrate quantum algorithms into the GUI.
+
+- **Phase 29:** API / Developer tools page  
+  Create a dedicated page for API and developer tools.
+
+- **Phase 30:** GUI polish and usability  
+  Refine the GUI for better usability and aesthetics.
+
+- **Phase 31:** Code quality gates  
+  Implement code quality gates to ensure high standards.
+
+- **Phase 32:** Example scripts  
+  Provide example scripts to demonstrate usage.
+
+- **Phase 33:** Second documentation pass after GUI  
+  Update documentation after the GUI is implemented.
+
+- **Phase 34:** Release preparation  
+  Prepare for the next release of QRiskLab.
+
+- **Phase 35:** Advanced future features  
+  Explore and plan for advanced features beyond the current roadmap.
+
+The GUI will be Streamlit-first because Streamlit already exists in the project.
 
 1. Create and activate a virtual environment:
    ```bash
