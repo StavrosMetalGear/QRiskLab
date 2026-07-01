@@ -10,6 +10,40 @@ Get up and running with QRiskLab Pro in minutes.
 4. [API Examples](#api-examples)
 5. [Dashboard Usage](#dashboard-usage)
 
+## Quick Start on Windows
+
+1. Create a virtual environment:
+   ```bash
+   py -3.11 -m venv .venv
+   ```
+
+2. Activate the virtual environment:
+   ```bash
+   .\.venv\Scripts\Activate.ps1
+   ```
+
+3. Upgrade pip, setuptools, and wheel:
+   ```bash
+   python -m pip install --upgrade pip setuptools wheel cmake ninja
+   ```
+
+4. Install the required packages:
+   ```bash
+   python -m pip install -r requirements.txt
+   python -m pip install -r requirements-dev.txt
+   python -m pip install -e .
+   ```
+
+5. Verify the installation:
+   ```bash
+   python -c "import qrisklab; from qrisklab.finance import MonteCarlo; print('QRiskLab import OK')"
+   ```
+
+6. Run tests:
+   ```bash
+   py -3.11 -m pytest tests\ -q
+   ```
+
 ## Installation
 
 ```bash
