@@ -272,7 +272,46 @@ xdg-open htmlcov/index.html  # Linux
 start htmlcov/index.html  # Windows
 ```
 
-## Building
+## Current Development Workflow
+
+1. Create and activate a virtual environment:
+   ```bash
+   python -m venv .venv
+   .venv\Scripts\activate  # On Windows
+   ```
+
+2. Install runtime and development requirements:
+   ```bash
+   python -m pip install -r requirements.txt
+   python -m pip install -r requirements-dev.txt
+   ```
+
+3. Install pybind11, CMake, and Ninja if needed:
+   ```bash
+   python -m pip install pybind11 cmake ninja
+   ```
+
+4. Install the package in editable mode:
+   ```bash
+   python -m pip install -e .
+   ```
+
+5. Run tests:
+   ```bash
+   py -3.11 -m pytest tests\ -q
+   ```
+
+6. Run the validation script if needed:
+   ```bash
+   powershell -ExecutionPolicy Bypass -File .\scripts\validate_dev.ps1
+   ```
+
+## CI Expectations
+
+- GitHub Actions installs dependencies
+- Performs smoke import
+- Builds package
+- Runs pytest
 
 ### Build C++ Extensions
 
