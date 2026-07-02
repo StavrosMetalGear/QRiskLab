@@ -44,10 +44,13 @@ def main():
         "Select a page:",
         [
             "Home",
+            "Information / Theory",
             "Option Pricing",
             "Risk Analysis",
+            "Portfolio Tools",
+            "Quantum State Tools",
             "Quantum Algorithms",
-            "Portfolio Management",
+            "API / Developer Tools",
         ],
     )
     
@@ -61,8 +64,22 @@ def main():
         from qrisklab.app.pages import risk_analysis
         risk_analysis.show()
     elif page == "Quantum Algorithms":
+        st.title("Quantum Algorithms")
+        st.markdown("This page will showcase various quantum algorithms.")
+    elif page == "API / Developer Tools":
+        st.title("API / Developer Tools")
+        st.markdown("This page will provide API and developer tools.")
         from qrisklab.app.pages import quantum
         quantum.show()
+    elif page == "Information / Theory":
+        st.title("Information / Theory")
+        st.markdown("This page will provide theoretical background and information.")
+    elif page == "Portfolio Tools":
+        st.title("Portfolio Tools")
+        st.markdown("This page will include tools for portfolio management.")
+    elif page == "Quantum State Tools":
+        st.title("Quantum State Tools")
+        st.markdown("This page will provide tools for managing quantum states.")
     elif page == "Portfolio Management":
         from qrisklab.app.pages import portfolio
         portfolio.show()
