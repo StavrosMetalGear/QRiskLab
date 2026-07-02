@@ -73,7 +73,26 @@ def main():
         quantum.show()
     elif page == "Information / Theory":
         st.title("Information / Theory")
-        st.markdown("This page will provide theoretical background and information.")
+        st.markdown("""
+        QRiskLab is a hybrid quantum-classical framework for financial risk analysis. 
+        It leverages Monte Carlo simulations to model complex financial instruments using 
+        Geometric Brownian Motion for stock price movements. 
+
+        European call option pricing is based on the discounted expected payoff, 
+        which calculates the present value of the option's future cash flows. 
+
+        Value at Risk (VaR) and Conditional VaR (CVaR) are risk metrics used to assess 
+        potential losses in a portfolio. 
+
+        In quantum computing, quantum states represent the probabilities of different outcomes, 
+        and amplitudes determine the likelihood of these outcomes. 
+
+        Quantum amplitude estimation is a technique that estimates the expected value of a function 
+        using quantum states, providing a potential speedup for certain calculations. 
+
+        It's important to note the assumptions and limitations of these models, 
+        as they may not always reflect real-world complexities.
+        """)
     elif page == "Portfolio Tools":
         st.title("Portfolio Tools")
         st.markdown("This page will include tools for portfolio management.")
