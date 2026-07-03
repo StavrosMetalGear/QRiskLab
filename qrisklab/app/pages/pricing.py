@@ -120,7 +120,7 @@ def show_single_pricing():
         except ValueError as ve:
             st.error(f"Value error: {str(ve)}")
             
-        except Exception as e:
+        
         except Exception as e:
             st.error(f"Error calculating price: {str(e)}")
             logger.error(f"Pricing error: {e}")
