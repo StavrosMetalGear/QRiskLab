@@ -9,6 +9,7 @@ import pandas as pd
 from typing import Dict, List, Tuple
 
 from qrisklab.finance.pricing import EuropeanCallPricer
+import random
 from qrisklab.utils.logger import get_logger
 
 logger = get_logger(__name__)
@@ -88,7 +89,8 @@ def show_single_pricing():
     
     if st.button("Calculate Price", key="single_price"):
         try:
-            pricer = EuropeanCallPricer(default_paths=paths)
+            seed = random.randint(0, 2**32 - 1)  # Generate a random seed
+            pricer = EuropeanCallPricer(default_paths=paths, default_seed=seed)
             result = pricer.price(
                 spot_price=spot_price,
                 strike_price=strike_price,
@@ -96,6 +98,7 @@ def show_single_pricing():
                 volatility=volatility,
                 maturity_years=maturity_years,
                 paths=paths,
+                seed=seed,
             )
             
             # Display results
@@ -114,6 +117,10 @@ def show_single_pricing():
             
             logger.info(f"Priced option: S={spot_price}, K={strike_price}, Price={result.estimated_price:.4f}")
             
+        except ValueError as ve:
+            st.error(f"Value error: {str(ve)}")
+            
+        except Exception as e:
         except Exception as e:
             st.error(f"Error calculating price: {str(e)}")
             logger.error(f"Pricing error: {e}")
