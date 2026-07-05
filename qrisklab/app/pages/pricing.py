@@ -97,7 +97,7 @@ def show_single_pricing():
     
     if st.button("Calculate Price", key="single_price"):
         try:
-            seed = random.randint(0, 2**32 - 1)  # Generate a random seed
+            # Removed random seed generation as we are using the user-defined seed
             pricer = EuropeanCallPricer(default_paths=paths, default_seed=seed)
             result = pricer.price(
                 spot_price=spot_price,
