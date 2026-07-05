@@ -17,7 +17,7 @@ logger = get_logger(__name__)
 
 def show():
     """Display risk analysis page."""
-    st.header("📊 Risk Analysis")
+    st.header("Risk Analysis")
     st.markdown("Calculate Value at Risk (VaR) and Conditional Value at Risk (CVaR)")
     
     # Create tabs
