@@ -107,7 +107,26 @@ def show_single_pricing():
             col2.metric("Standard Error", f"${result.standard_error:.6f}")
             col3.metric("Paths", f"{paths:,}")
             
-            # Display input parameters
+            # Display input parameters and payoff statistics
+            if result.discounted_payoffs:
+                payoffs_series = pd.Series(result.discounted_payoffs)
+                mean_payoff = payoffs_series.mean()
+                min_payoff = payoffs_series.min()
+                max_payoff = payoffs_series.max()
+                confidence_interval = (
+                    result.estimated_price - 1.96 * result.standard_error,
+                    result.estimated_price + 1.96 * result.standard_error
+                )
+                
+                st.subheader("Payoff Statistics")
+                st.metric("Mean Payoff", f"${mean_payoff:.4f}")
+                st.metric("Min Payoff", f"${min_payoff:.4f}")
+                st.metric("Max Payoff", f"${max_payoff:.4f}")
+                st.metric("95% Confidence Interval", f"[${confidence_interval[0]:.4f}, ${confidence_interval[1]:.4f}]")
+                
+                # Display binned payoff distribution
+                st.subheader("Payoff Distribution")
+                st.bar_chart(payoffs_series.value_counts(bins=10))
             st.subheader("Input Parameters")
             params_df = pd.DataFrame({
                 "Parameter": ["Spot Price", "Strike Price", "Risk-Free Rate", "Volatility", "Maturity"],
