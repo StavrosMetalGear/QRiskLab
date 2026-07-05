@@ -9,7 +9,7 @@ import pandas as pd
 from typing import Dict, List, Tuple
 
 from qrisklab.finance.pricing import EuropeanCallPricer
-import random
+# Removed random import as it is no longer needed
 from qrisklab.utils.logger import get_logger
 
 logger = get_logger(__name__)
@@ -17,7 +17,7 @@ logger = get_logger(__name__)
 
 def show():
     """Display option pricing page."""
-    st.header("📈 European Call Option Pricing")
+    st.header("European Call Option Pricing")
     st.markdown("Price European call options using Monte Carlo simulation")
     
     # Create tabs
@@ -66,6 +66,7 @@ def show_single_pricing():
     with col2:
         volatility = st.slider(
             "Volatility (σ)",
+            "Volatility (σ)",
             min_value=0.01,
             max_value=1.0,
             value=0.2,
@@ -78,6 +79,13 @@ def show_single_pricing():
             value=1.0,
             step=0.1,
             help="Time to maturity in years"
+        )
+        seed = st.number_input(
+            "Random Seed",
+            min_value=0,
+            value=42,
+            step=1,
+            help="Random seed for Monte Carlo simulation"
         )
         paths = st.number_input(
             "Monte Carlo Paths",
