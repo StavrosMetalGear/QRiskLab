@@ -40,6 +40,12 @@ def show_single_analysis():
     col1, col2 = st.columns(2)
     
     with col1:
+        random_seed = st.number_input(
+            "Random Seed",
+            value=42,
+            step=1,
+            help="Seed for random number generation"
+        )
         confidence_level = st.slider(
             "Confidence Level",
             min_value=0.80,
@@ -74,8 +80,10 @@ def show_single_analysis():
     if st.button("Calculate Risk Metrics", key="single_risk"):
         try:
             # Generate synthetic loss data
-            np.random.seed(42)
-            losses = np.random.normal(mean_loss, std_loss, num_scenarios).tolist()
+            seed = int(random_seed)
+            num_scenarios = int(num_scenarios)
+            rng = np.random.default_rng(seed)
+            losses = rng.normal(mean_loss, std_loss, num_scenarios).tolist()
             
             analyzer = RiskAnalyzer()
             result = analyzer.analyze_risk(losses, confidence_level)
