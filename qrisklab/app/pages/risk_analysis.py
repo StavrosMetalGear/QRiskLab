@@ -123,6 +123,13 @@ def show_multi_level_analysis():
     col1, col2 = st.columns(2)
     
     with col1:
+        random_seed = st.number_input(
+            "Random Seed",
+            value=42,
+            step=1,
+            key="multi_seed",
+            help="Seed for random number generation"
+        )
         num_scenarios = st.number_input(
             "Number of Scenarios",
             min_value=100,
@@ -163,9 +170,15 @@ def show_multi_level_analysis():
     
     if st.button("Run Multi-Level Analysis", key="multi_risk"):
         try:
+            if not confidence_levels:
+                st.warning("Please select at least one confidence level.")
+                return
+
             # Generate synthetic loss data
-            np.random.seed(42)
-            losses = np.random.normal(mean_loss, std_loss, num_scenarios).tolist()
+            seed = int(random_seed)
+            num_scenarios = int(num_scenarios)
+            rng = np.random.default_rng(seed)
+            losses = rng.normal(mean_loss, std_loss, num_scenarios).tolist()
             
             analyzer = RiskAnalyzer()
             results_dict = analyzer.multi_level_analysis(losses, confidence_levels)
