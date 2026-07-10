@@ -241,19 +241,25 @@ def show_loss_distribution():
             0.01,
             key="dist_cl"
         )
+        seed = st.number_input(
+            "Random Seed",
+            min_value=0,
+            value=42,
+            step=1,
+            key="dist_seed"
+        )
     
     if st.button("Generate Distribution", key="dist_gen"):
         try:
             # Generate synthetic loss data
-            np.random.seed(42)
-            losses = np.random.normal(mean_loss, std_loss, num_scenarios)
+            seed = int(seed)
+            num_scenarios = int(num_scenarios)
+            rng = np.random.default_rng(seed)
+            losses = rng.normal(mean_loss, std_loss, num_scenarios)
             
             # Calculate VaR
             analyzer = RiskAnalyzer()
             var = analyzer.calculate_var(losses.tolist(), confidence_level)
-            
-            # Create histogram
-            fig_data = pd.DataFrame({"Losses": losses})
             
             st.markdown(f"**VaR at {confidence_level:.0%} confidence: ${var:.2f}**")
             
