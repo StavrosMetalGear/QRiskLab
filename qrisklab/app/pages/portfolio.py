@@ -232,6 +232,17 @@ def show_portfolio_summary():
     
     portfolio = st.session_state.portfolio
     summary = portfolio.get_summary()
+
+    if portfolio.positions:
+        selected_position = st.selectbox(
+            "Position to Remove",
+            options=[position.name for position in portfolio.positions],
+            key="remove_portfolio_position",
+        )
+        if st.button("Remove Position", key="remove_position"):
+            if portfolio.remove_position(selected_position):
+                st.success(f"Removed position: {selected_position}")
+                st.rerun()
     
     # Display key metrics
     col1, col2, col3, col4 = st.columns(4)
