@@ -23,6 +23,11 @@ def show():
     """Display quantum algorithms page."""
     st.header("🔬 Quantum Algorithms")
     st.markdown("Run quantum algorithms for financial analysis")
+    st.info(
+        "This page is currently a quantum algorithm demonstration/prototype. "
+        "Outputs are fixed placeholder/scaffolding results. Backend selection "
+        "currently records intent but does not execute real backend jobs."
+    )
     
     # Display available backends
     show_backend_status()
@@ -196,7 +201,7 @@ def show_vqe():
             col2.metric("Execution Time", f"{result.execution_time_seconds:.3f}s")
             col3.metric("Iterations", result.iterations)
             
-            st.info(f"Optimization converged after {result.iterations} iterations")
+            st.info("Demonstration result")
             
             logger.info(f"VQE completed: eigenvalue={result.eigenvalue:.6f}")
             
