@@ -14,6 +14,7 @@ from qrisklab.quantum.algorithms import (
     QuantumPhaseEstimation,
 )
 from qrisklab.quantum.backends import BackendFactory
+from qrisklab.quantum.state import QuantumStateWrapper
 from qrisklab.utils.logger import get_logger
 
 logger = get_logger(__name__)
@@ -33,10 +34,11 @@ def show():
     show_backend_status()
     
     # Create tabs for different algorithms
-    tab1, tab2, tab3 = st.tabs([
+    tab1, tab2, tab3, tab4 = st.tabs([
         "Amplitude Estimation",
         "Variational Quantum Eigensolver",
-        "Quantum Phase Estimation"
+        "Quantum Phase Estimation",
+        "State Visualization"
     ])
     
     with tab1:
@@ -47,6 +49,9 @@ def show():
     
     with tab3:
         show_phase_estimation()
+
+    with tab4:
+        show_state_visualization()
 
 
 def show_backend_status():
@@ -276,3 +281,50 @@ def show_phase_estimation():
         except Exception as e:
             st.error(f"Error running phase estimation: {str(e)}")
             logger.error(f"Phase estimation error: {e}")
+
+def show_state_visualization():
+    """Display amplitudes and probabilities for two-qubit example states."""
+    st.subheader("Quantum State Visualization")
+    example = st.selectbox(
+        "Example State",
+        ["Zero state |00>", "Equal superposition", "Bell state"],
+        key="state_visualization_example",
+    )
+
+    try:
+        state = QuantumStateWrapper(2)
+    except RuntimeError as e:
+        st.warning(
+            "Quantum state visualization is unavailable because the C++ "
+            "QuantumState bindings could not be loaded. Build the extensions "
+            "with: python -m pip install -e ."
+        )
+        logger.warning(f"Quantum state visualization unavailable: {e}")
+        return
+
+    state.reset()
+    if example == "Equal superposition":
+        state.apply_hadamard(0)
+        state.apply_hadamard(1)
+    elif example == "Bell state":
+        state.apply_hadamard(0)
+        state.apply_cnot(0, 1)
+
+    snapshot = state.get_snapshot()
+    col1, col2 = st.columns(2)
+    col1.metric("Qubit Count", snapshot.qubit_count)
+    col2.metric("State Dimension", state.dimension)
+
+    rows = []
+    for index, amplitude in enumerate(snapshot.amplitudes):
+        basis = format(index, f"0{snapshot.qubit_count}b")
+        rows.append({
+            "Basis State": f"|{basis}>",
+            "Real Amplitude": amplitude.real,
+            "Imaginary Amplitude": amplitude.imag,
+            "Probability": snapshot.basis_probabilities.get(basis, 0.0),
+        })
+    table = pd.DataFrame(rows)
+    st.dataframe(table)
+    st.bar_chart(table.set_index("Basis State")[["Probability"]])
+
