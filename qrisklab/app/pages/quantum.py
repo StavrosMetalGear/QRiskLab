@@ -285,6 +285,17 @@ def show_phase_estimation():
 def show_state_visualization():
     """Display amplitudes and probabilities for two-qubit example states."""
     st.subheader("Quantum State Visualization")
+    st.markdown(
+        "For two qubits, **basis states** `|00>`, `|01>`, `|10>`, and `|11>` "
+        "label the four possible measurement outcomes; each digit is one qubit's result. "
+        "An **amplitude** is the complex number behind each basis state, shown below "
+        "as real and imaginary parts. Its squared magnitude gives the **probability**: "
+        "the chance of measuring that basis state.\n\n"
+        "- **Zero state**: both qubits measure as 0, so `|00>` has probability 100%.\n"
+        "- **Equal superposition**: all four basis states have an equal 25% chance.\n"
+        "- **Bell state**: the qubits are entangled (linked); measuring them gives "
+        "`|00>` or `|11>` with a 50% chance each, so their results always match."
+    )
     example = st.selectbox(
         "Example State",
         ["Zero state |00>", "Equal superposition", "Bell state"],
