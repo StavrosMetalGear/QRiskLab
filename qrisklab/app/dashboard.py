@@ -68,7 +68,26 @@ def main():
         quantum.show()
     elif page == "API / Developer Tools":
         st.title("API / Developer Tools")
-        st.markdown("This page will provide API and developer tools.")
+        st.subheader("API quick start")
+        st.info(
+            "Run the API server separately from the Streamlit dashboard. "
+            "This page does not start the API server automatically."
+        )
+        st.markdown("Start the API server in a separate terminal from the project root:")
+        st.code("python scripts/run_api.py", language="bash")
+        st.markdown("**Local API base URL:** `http://127.0.0.1:8000`")
+        st.markdown(
+            "**API documentation (available while the API server is running):**\n\n"
+            "- [Swagger UI](http://127.0.0.1:8000/docs)\n"
+            "- [ReDoc](http://127.0.0.1:8000/redoc)"
+        )
+        st.markdown("**Main endpoint groups**")
+        st.table([
+            {"Group": "Health", "Endpoint": "GET /health"},
+            {"Group": "Pricing", "Endpoint": "POST /api/pricing/european-call"},
+            {"Group": "Risk", "Endpoint": "POST /api/risk/analyze"},
+            {"Group": "Quantum", "Endpoint": "GET /api/quantum/backends"},
+        ])
     elif page == "Information / Theory":
         st.title("Information / Theory")
         st.markdown("""
