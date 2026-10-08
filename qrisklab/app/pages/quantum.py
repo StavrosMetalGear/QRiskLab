@@ -302,6 +302,21 @@ def show_state_visualization():
         key="state_visualization_example",
     )
 
+    expected_results = {
+        "Zero state |00>": (
+            "Expected result: `|00>` should have probability 1.0 and all other states 0.0."
+        ),
+        "Equal superposition": (
+            "Expected result: `|00>`, `|01>`, `|10>`, and `|11>` should each "
+            "have probability about 0.25."
+        ),
+        "Bell state": (
+            "Expected result: `|00>` and `|11>` should each have probability "
+            "about 0.5, while `|01>` and `|10>` should be near 0.0."
+        ),
+    }
+    st.info(expected_results[example])
+
     try:
         state = QuantumStateWrapper(2)
     except RuntimeError as e:
